@@ -26,4 +26,6 @@
 
 ## Architecture
 
+Will use sqlite for now, later change it to Postgres
+
 *(to be written: local cache sync strategy, atomic claim update, etc.)*
