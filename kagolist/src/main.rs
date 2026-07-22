@@ -1,30 +1,22 @@
-use rapina::prelude::*;
+use rapina::database::DatabaseConfig;
 use rapina::middleware::RequestLogMiddleware;
-use rapina::schemars;
+use rapina::middleware::TraceIdMiddleware;
+use rapina::prelude::*;
 
-#[derive(Serialize, JsonSchema)]
-struct MessageResponse {
-    message: String,
-}
-
-#[get("/")]
-async fn hello() -> Json<MessageResponse> {
-    Json(MessageResponse {
-        message: "Hello from Rapina!".to_string(),
-    })
-}
+mod entity;
+mod items;
 
 #[tokio::main]
 async fn main() -> std::io::Result<()> {
-    
-    let router = Router::new()
-        .get("/", hello);
-    
+    let db_config = DatabaseConfig::from_env()?;
     Rapina::new()
         .with_tracing(TracingConfig::new())
+        .middleware(TraceIdMiddleware::new())
         .middleware(RequestLogMiddleware::new())
+        .with_database(db_config)
+        .await?
         .with_health_check(true)
-        .router(router)
+        .discover()
         .listen("127.0.0.1:3000")
         .await
 }

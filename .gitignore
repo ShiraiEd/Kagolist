@@ -18,6 +18,17 @@ target
 .env.*
 !.env.example
 
+# Local SQLite database
+*.db
+*.db-wal
+*.db-shm
+*.db-journal
+
+
+# Generated seed data (fake data from `rapina seed
+generate`)
+seeds/
+
 # RustRover
 #  JetBrains specific template is maintained in a separate JetBrains.gitignore that can
 #  be found at https://github.com/github/gitignore/blob/main/Global/JetBrains.gitignore

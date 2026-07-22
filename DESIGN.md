@@ -29,3 +29,34 @@
 Will use sqlite for now, later change it to Postgres
 
 *(to be written: local cache sync strategy, atomic claim update, etc.)*
+
+## Schema
+
+Now the current schema is just a `item` table with
+id: integer 
+name: varchar 
+quantity: integer 
+price: integer 
+
+### what was done 
+
+2026-07-22
+rapina new 
+rapina add resource item name:string quantity:i32 price:i32
+added tracing config to show x-trace-id 
+rapina seed generate 
+rapina seed load 
+added validation to crate item dto
+
+### notes about using rapina 
+So far i have noticed that there is no sqlite docs
+No step by step guide to create a project from 0, of course you can do how you want
+but a simple guide would be nice for the ones lost like me, end up creating the .env 
+the db url, did rapina migrate init and add resource, but the entities mod wasnt found, had to add it manually, maybe a bug 
+
+opened a issue about the add resource 
+and a question about the router x discover in the repo 
+
+Still confused about the trace-id / x-trace-id 
+
+opened issue abput the add resource withou id bug 
